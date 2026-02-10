@@ -2,7 +2,8 @@ import { betterAuth } from "better-auth";
 import { oneTap } from "better-auth/plugins";
 import Database from "better-sqlite3";
 
-const db = new Database("./sqlite.db");
+const dbPath = process.env.VERCEL ? "/tmp/sqlite.db" : "./sqlite.db";
+const db = new Database(dbPath);
 db.pragma("journal_mode = WAL");
 
 export const auth = betterAuth({
